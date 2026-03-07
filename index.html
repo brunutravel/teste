@@ -2,97 +2,197 @@
 <html lang="pt">
 <head>
   <meta charset="utf-8">
-  <title>Brunu Travel • Home</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Home • Brunu Travel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <div class="logo-wrap"><img src="assets/images/logo.jpg" alt="Logo"></div>
-        <div class="brand-lines"><div class="brand-name">Brunu Travel</div><div class="brand-tag">Viagens de grupo</div></div>
+      <a class="brand" href="index.html" aria-label="Brunu Travel home">
+        <div class="logo-wrap"><img src="assets/images/logo.jpg" alt="Brunu Travel logo"></div>
+        <div class="brand-lines">
+          <div class="brand-name">Brunu Travel</div>
+          <div class="brand-tag">Viagens de grupo</div>
+        </div>
       </a>
-      <nav class="nav"><a href="quem-somos.html">Quem somos</a><a href="viagens.html">Viagens de grupo</a><a href="guias-e-dicas.html">Guias e Dicas</a></nav>
+      <nav class="nav" aria-label="Primary">
+        <a href="quem-somos.html">Quem somos</a>
+        <a href="viagens.html">Viagens de grupo</a>
+        <a href="guias-e-dicas.html">Guias e Dicas</a>
+      </nav>
       <div class="header-actions">
-        <button class="pill" id="phoneBtn">🇵🇹 (+351) 963 623 430</button>
-        <button class="icon-btn" id="burgerBtn"><i class="fa-solid fa-bars"></i></button>
+        <button class="pill" id="phoneBtn" type="button" aria-label="Contact phone">
+          🇵🇹 <span class="mini">(+351)</span> 963 623 430
+        </button>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <button class="icon-btn" id="burgerBtn" type="button" aria-label="Open menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
     </div>
   </header>
 
-  <main class="container hero">
-    <div class="hero-left">
-      <h1 class="hero-title">Viagens de grupo e grupos privados</h1>
-      <p class="hero-p">Roteiros autênticos para quem prefere a experiência ao postal. Junta-te a nós na próxima aventura.</p>
-    </div>
-    <div class="hero-right">
-      <aside class="bio-card">
-        <div class="bio-top">
-          <img class="avatar" src="assets/images/bruno-profile.jpg" alt="Bruno">
-          <div class="bio-name">Brunu Travel</div>
-        </div>
-        <div class="actions">
-          <a class="big-btn" href="quem-somos.html"><span>Quem somos</span><i class="fa-solid fa-chevron-right"></i></a>
-          <a class="big-btn" href="viagens.html"><span>Viagens de grupo</span><i class="fa-solid fa-chevron-right"></i></a>
-          <a class="big-btn" href="guias-e-dicas.html"><span>Guias e Dicas</span><i class="fa-solid fa-chevron-right"></i></a>
-        </div>
-        <div class="small-title">Mencionado nas redes sociais</div>
-        <div class="actions">
-          <a class="big-btn" href="https://instagram.com/riia.rh" target="_blank"><span>Riia Recursos Humanos</span><i class="fa-brands fa-instagram"></i></a>
-          <a class="big-btn" href="https://instagram.com/viagens.rainho" target="_blank"><span>Viagens Rainho</span><i class="fa-brands fa-instagram"></i></a>
-        </div>
-        <div class="social-row">
-          <a href="https://instagram.com/brunutravel" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-          <a href="#"><i class="fa-brands fa-youtube"></i></a>
-        </div>
-      </aside>
-    </div>
+  <main>
+    <section class="container hero">
+      <div class="hero-left">
+        <h1 class="hero-title">Viagens de grupo e grupos privados</h1>
+        <p class="hero-sub">Pequenos grupos. <span>Grandes experiências.</span></p>
+        <p class="hero-p">
+          A Brunu Travel organiza viagens de grupo com roteiros autênticos, pensados ao detalhe para quem quer explorar o mundo sem preocupações. Sem sensação de excursão. Junta-te a nós na próxima aventura.
+        </p>
+      </div>
+      
+      <div class="hero-right">
+        <aside class="bio-card" aria-label="Brunu Travel quick actions">
+          <div class="bio-top">
+            <img class="avatar" src="assets/images/bruno-profile.jpg" alt="Brunu Travel">
+            <div class="bio-name">Brunu Travel</div>
+          </div>
+
+          <div class="actions">
+            <a class="big-btn" href="quem-somos.html">
+              <div class="big-left">
+                <div class="big-ico"><i class="fa-regular fa-id-card"></i></div>
+                <span>Quem somos</span>
+              </div>
+              <div class="big-arrow">›</div>
+            </a>
+            <a class="big-btn" href="viagens.html">
+              <div class="big-left">
+                <div class="big-ico"><i class="fa-solid fa-users"></i></div>
+                <span>Viagens de grupo</span>
+              </div>
+              <div class="big-arrow">›</div>
+            </a>
+            <a class="big-btn" href="guias-e-dicas.html">
+              <div class="big-left">
+                <div class="big-ico"><i class="fa-solid fa-book-open"></i></div>
+                <span>Guias e Dicas</span>
+              </div>
+              <div class="big-arrow">›</div>
+            </a>
+          </div>
+
+          <div class="small-title">Mencionado nas redes sociais</div>
+          
+          <div class="actions">
+            <a class="big-btn mention-btn" href="https://instagram.com/riia.rh" target="_blank" rel="noreferrer">
+              <div class="big-left">
+                <div class="big-ico"><i class="fa-brands fa-instagram"></i></div>
+                <span>Riia Recursos Humanos</span>
+              </div>
+              <div class="big-arrow">›</div>
+            </a>
+            <a class="big-btn mention-btn" href="https://instagram.com/viagens.rainho" target="_blank" rel="noreferrer">
+              <div class="big-left">
+                <div class="big-ico"><i class="fa-brands fa-instagram"></i></div>
+                <span>Viagens Rainho</span>
+              </div>
+              <div class="big-arrow">›</div>
+            </a>
+          </div>
+
+          <div class="social-row" aria-label="Social links">
+            <a class="social" href="https://instagram.com/brunutravel" target="_blank" rel="noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a class="social" href="https://www.facebook.com/profile.php?id=61586558676697" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a class="social" href="https://www.youtube.com/@brunu_uncut_travel" target="_blank" rel="noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a class="social" href="https://www.tiktok.com/@brunu_uncut_travel" target="_blank" rel="noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+          <div class="handle">@brunutravel</div>
+        </aside>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer">
+  <button class="fab" id="chatBtn" aria-label="WhatsApp Ajuda">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="fab-text">Podemos ajudar?</span>
+  </button>
+
+  <footer>
     <div class="container">
-      <div class="footer-grid-minimal">
-        <div class="footer-col">
-          <div class="footer-title">Navegação</div>
-          <div class="footer-links-vert">
-            <a href="quem-somos.html">Quem somos</a>
-            <a href="viagens.html">Próximas Viagens</a>
-            <a href="guias-e-dicas.html">Guias e Dicas</a>
-          </div>
+      <div class="footer-grid">
+        <div class="footer-links">
+          <div class="footer-title">Temas</div>
+          <a href="viagens.html#sol">Sol & Praia</a><br>
+          <a href="viagens.html#cultura">Cultura & Experiências</a><br>
+          <a href="viagens.html#desporto">Desporto</a><br>
+          <a href="viagens.html#grandes">Grandes Viagens</a>
         </div>
-        <div class="footer-col">
+        <div class="footer-contact">
           <div class="footer-title">Contactos</div>
-          <div class="footer-links-vert">
-            <a href="https://wa.me/351963623430">WhatsApp (+351) 963 623 430</a>
-            <a href="mailto:info@brunutravel.pt">info@brunutravel.pt</a>
-          </div>
+          <div><a href="mailto:info@brunutravel.pt">info@brunutravel.pt</a></div>
+          <div><a href="https://wa.me/351963623430" target="_blank" rel="noreferrer">WhatsApp (+351) 963 623 430</a></div>
+          <div><a href="https://www.brunutravel.pt" target="_blank" rel="noreferrer">www.brunutravel.pt</a></div>
         </div>
-        <div class="footer-col">
-          <div class="footer-title">Redes Sociais</div>
-          <div class="footer-socials">
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        <div>
+          <div class="footer-title">Redes <span style="text-transform:none; letter-spacing:0; font-weight:500; opacity:0.85; margin-left:4px;">@brunutravel</span></div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <a class="social" href="https://instagram.com/brunutravel" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a class="social" href="https://www.facebook.com/profile.php?id=61586558676697" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+            <a class="social" href="https://www.youtube.com/@brunu_uncut_travel" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a class="social" href="https://www.tiktok.com/@brunu_uncut_travel" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
           </div>
         </div>
       </div>
-      <div class="footer-bottom-minimal">
-        <div>© 2026 Brunu Travel</div>
-        <div class="legal-links">
-          <button id="termosBtn" class="text-btn">Termos e Condições</button> • 
-          <button id="privacidadeBtn" class="text-btn">Privacidade e Cookies</button>
-        </div>
+      <div class="footer-bottom">
+        <span>© 2026 Brunu Travel</span>
       </div>
     </div>
   </footer>
 
-  <div class="overlay" id="termosOverlay"><div class="modal"><header><strong>Termos</strong><button id="termosClose">✕</button></header><div class="modal-body">A Brunu Travel atua como organizadora de viagens...</div></div></div>
-  <div class="overlay" id="privacidadeOverlay"><div class="modal"><header><strong>Privacidade</strong><button id="privacidadeClose">✕</button></header><div class="modal-body">Respeitamos o RGPD...</div></div></div>
-  <div class="overlay" id="menuOverlay"><div class="modal"><header><strong>Menu</strong><button id="menuClose">✕</button></header><div class="modal-body stack"><a href="index.html">Home</a><a href="viagens.html">Viagens</a><a href="quem-somos.html">Quem Somos</a></div></div></div>
-  
+  <div class="overlay" id="menuOverlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <header><strong>Brunu Travel</strong><button id="menuClose">✕</button></header>
+      <div class="modal-body stack">
+        <a class="modal-link" href="index.html">Home <span>→</span></a>
+        <a class="modal-link" href="quem-somos.html">Quem somos <span>→</span></a>
+        <a class="modal-link" href="viagens.html">Viagens de grupo <span>→</span></a>
+        <a class="modal-link" href="guias-e-dicas.html">Guias e Dicas <span>→</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="overlay" id="chatOverlay" role="dialog" aria-modal="true" aria-label="Atendimento">
+    <div class="modal chat-modal">
+      <header class="chat-header">
+        <div class="chat-profile">
+          <img src="assets/images/bruno-profile.jpg" alt="Bruno Oliveira">
+          <div class="chat-info">
+            <strong>Equipa Brunu Travel</strong>
+            <small>Responde habitualmente na hora</small>
+          </div>
+        </div>
+        <button id="chatClose" class="chat-close">✕</button>
+      </header>
+      <div class="modal-body chat-body">
+        <div class="chat-bubble bot-msg">
+          <p>Olá! 👋 Bem-vindo à Brunu Travel.</p>
+          <p>Clica no link em baixo para abrires uma nova conversa diretamente com o Bruno Oliveira pelo WhatsApp.</p>
+        </div>
+        <a href="https://wa.me/351963623430?text=Ol%C3%A1%20Bruno!%20Estou%20no%20site%20e%20gostava%20de%20saber%20mais." target="_blank" class="chat-action-btn">
+          <i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="overlay" id="phoneOverlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <header><strong>Contactos</strong><button id="phoneClose">✕</button></header>
+      <div class="modal-body stack">
+        <a class="modal-link" href="https://wa.me/351963623430">WhatsApp <span>(+351) 963 623 430</span></a>
+        <a class="modal-link" href="tel:+351963623430">Ligar <span>(+351) 963 623 430</span></a>
+        <a class="modal-link" href="mailto:info@brunutravel.pt">Email <span>info@brunutravel.pt</span></a>
+      </div>
+    </div>
+  </div>
+
   <script src="assets/app.js"></script>
 </body>
 </html>
