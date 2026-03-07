@@ -2,49 +2,29 @@
 <html lang="pt">
 <head>
   <meta charset="utf-8">
-  <title>Guias e Dicas • Brunu Travel</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Guias e Dicas • Brunu Travel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <div class="logo-wrap"><img src="assets/images/logo.jpg" alt="Logo"></div>
-        <div class="brand-lines">
-          <div class="brand-name">Brunu Travel</div>
-          <div class="brand-tag">Viagens de grupo</div>
-        </div>
-      </a>
-      <nav class="nav">
-        <a href="quem-somos.html">Quem somos</a>
-        <a href="viagens.html">Viagens de grupo</a>
-        <a href="guias-e-dicas.html" aria-current="page">Guias e Dicas</a>
-      </nav>
-      <div class="header-actions">
-        <button class="pill" id="phoneBtn">🇵🇹 (+351) 963 623 430</button>
-        <button class="icon-btn" id="burgerBtn"><i class="fa-solid fa-bars-staggered"></i></button>
-      </div>
-    </div>
-  </header>
+  <div id="app-header"></div>
 
-  <main>
-    <section class="container" style="padding: 60px 0 40px;">
-      <h1 class="page-title" style="font-family: var(--font-display); font-size: clamp(32px, 5vw, 42px); margin-bottom: 12px;">Guias e Dicas</h1>
-      <p class="page-subtitle" style="color: var(--muted); font-size: 18px; max-width: 600px; line-height: 1.5;">
-        Guias essenciais disponíveis nos Reels.<br>
-        Versões premium e itinerários personalizados por WhatsApp.
-      </p>
+  <main class="page-trips">
+    <section class="container" style="margin-top: 40px; margin-bottom: 30px;">
+      <h1 class="page-title">Guias e Dicas de Viagem</h1>
+      <p class="page-subtitle">Guias rápidos nas redes sociais e itinerários personalizados à tua medida.</p>
     </section>
 
-    <section class="container trips-section" style="padding-bottom: 60px;">
-      <div class="section-header-flex" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px;">
+    <section class="container trips-section">
+      <div class="section-header-flex">
         <div>
-          <h2 class="section-title" style="font-family: var(--font-display); font-size: 26px;">Guias Essenciais</h2>
-          <p class="section-subtitle" style="color: var(--muted); font-size: 14px;">Guias rápidos e práticos para começar a planear melhor.</p>
+          <h2 class="section-title">Guias Essenciais</h2>
+          <p class="section-subtitle">Os essenciais para começares a planear a tua viagem.</p>
         </div>
       </div>
 
@@ -55,63 +35,63 @@
         <div class="slider-track" id="tripsCarousel">
           
           <article class="trip-card">
-            <div class="trip-frame">
-              <img src="assets/images/izmir.jpg" alt="Guia Izmir">
-              <div class="badge">Free City Guide</div>
+            <div class="guide-frame">
+              <img src="assets/images/izmir.jpg" alt="Izmir" loading="lazy">
             </div>
-            <div class="guide-bottom" style="margin-top:12px;">
-              <h3 class="guide-title" style="font-family: var(--font-display); font-size: 18px; margin-bottom:4px;">Guia &middot; Izmir</h3>
-              <p class="guide-sub" style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">Disponível no Reel</p>
+            <div class="guide-bottom">
+              <h3 class="guide-title" title="Guia de Izmir · Turquia">Guia de Izmir · Turquia</h3>
+              <p class="guide-sub">Disponível nos Reels</p>
               
-              <div class="guide-social" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                <span style="font-size: 11px; opacity: 0.6;">Ver em:</span>
-                <a href="#" style="font-size: 16px; opacity: 0.8;"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" style="font-size: 16px; opacity: 0.8;"><i class="fa-brands fa-tiktok"></i></a>
+              <div class="guide-social">
+                <span>Ver em:</span>
+                <a href="https://instagram.com/brunutravel" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61586558676697" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.youtube.com/@brunu_uncut_travel" target="_blank"><i class="fa-brands fa-youtube"></i></a>				
+                <a href="https://www.tiktok.com/@brunu_uncut_travel" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
               </div>
               
-              <a href="https://wa.me/351963623430" target="_blank" class="guide-premium" style="color: #25D366; font-weight: 600; font-size: 13px;">
-                🟢 Comprar Premium
-              </a>
+              <button class="guide-premium-btn" onclick="document.getElementById('phoneOverlay').classList.add('open'); document.body.style.overflow='hidden';">
+                Obter guia detalhado <span>→</span>
+              </button>
             </div>
           </article>
 
           <article class="trip-card">
-            <div class="trip-frame">
-              <img src="assets/images/chios.jpg" alt="Guia Chios">
-              <div class="badge">Free City Guide</div>
+            <div class="guide-frame">
+              <img src="assets/images/istambul.jpg" alt="Chios" loading="lazy">
             </div>
-            <div class="guide-bottom" style="margin-top:12px;">
-              <h3 class="guide-title" style="font-family: var(--font-display); font-size: 18px; margin-bottom:4px;">Guia &middot; Chios</h3>
-              <p class="guide-sub" style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">Disponível no Reel</p>
+            <div class="guide-bottom">
+              <h3 class="guide-title" title="Guia de Chios · Grécia">Guia de Chios · Grécia</h3>
+              <p class="guide-sub">Em breve</p>
               
-              <div class="guide-social" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                <span style="font-size: 11px; opacity: 0.6;">Ver em:</span>
-                <a href="#" style="font-size: 16px; opacity: 0.8;"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" style="font-size: 16px; opacity: 0.8;"><i class="fa-brands fa-tiktok"></i></a>
+              <div class="guide-social" style="margin-top: 12px;">
+                <span>Segue</span>
+                <a href="https://instagram.com/brunutravel" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61586558676697" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.youtube.com/@brunu_uncut_travel" target="_blank"><i class="fa-brands fa-youtube"></i></a>				
+                <a href="https://www.tiktok.com/@brunu_uncut_travel" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
               </div>
-              
-              <a href="https://wa.me/351963623430" target="_blank" class="guide-premium" style="color: #25D366; font-weight: 600; font-size: 13px;">
-                🟢 Comprar Premium
-              </a>
             </div>
           </article>
 
           <article class="trip-card">
-            <div class="trip-frame">
-              <img src="assets/images/istambul.jpg" alt="Guia Istambul">
-              <div class="badge" style="background: var(--ink); color: #fff;">Em breve</div>
+            <div class="guide-frame">
+              <img src="assets/images/istambul.jpg" alt="Istambul" loading="lazy">
             </div>
-            <div class="guide-bottom" style="margin-top:12px;">
-              <h3 class="guide-title" style="font-family: var(--font-display); font-size: 18px; margin-bottom:4px;">Guia &middot; Istambul</h3>
-              <p class="guide-sub" style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">Disponível em breve</p>
+            <div class="guide-bottom">
+              <h3 class="guide-title" title="Guia de Istambul · Turquia">Guia de Istambul · Turquia</h3>
+              <p class="guide-sub">Em breve</p>
               
-              <div class="guide-social" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-                <span style="font-size: 11px; opacity: 0.6;">Acompanha-me:</span>
-                <a href="https://instagram.com/brunutravel" target="_blank" style="font-size: 16px; opacity: 0.8;"><i class="fa-brands fa-instagram"></i></a>
+              <div class="guide-social" style="margin-top: 12px;">
+                <span>Segue</span>
+                <a href="https://instagram.com/brunutravel" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61586558676697" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.youtube.com/@brunu_uncut_travel" target="_blank"><i class="fa-brands fa-youtube"></i></a>				
+                <a href="https://www.tiktok.com/@brunu_uncut_travel" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
               </div>
             </div>
           </article>
-
+          
         </div>
       </div>
 
@@ -120,64 +100,31 @@
       </div>
     </section>
 
-    <section class="container" style="padding-bottom: 100px;">
-      <div class="premium-banner" style="display: flex; align-items: center; justify-content: space-between; background: var(--card); border: 1px solid var(--cardBorder); border-radius: 24px; padding: 40px; flex-wrap: wrap; gap: 30px;">
-        <div class="banner-text">
-          <h3 style="font-family: var(--font-display); font-size: 24px; margin-bottom: 10px;">Premium & Personalizado</h3>
-          <p style="font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 500px;">Queres um guia mais completo ou um itinerário feito para ti? Fala comigo no WhatsApp para desenharmos a tua próxima experiência.</p>
-        </div>
-        <a href="https://wa.me/351963623430" target="_blank" class="pill" style="height: 54px; background: #25D366; color: #fff; border: none; padding: 0 30px; font-weight: 600;">
-          <i class="fa-brands fa-whatsapp" style="margin-right:10px;"></i> Falar no WhatsApp
-        </a>
+    <section class="container" style="margin-bottom: 24px;">
+      <div style="max-width: 600px;">
+        <h2 style="font-family: var(--font-display); font-size: 24px; margin-bottom: 12px; color: var(--text);">Guias Premium e Itinerários Personalizados</h2>
+        <p style="font-size: 15px; color: var(--muted); line-height: 1.6; margin: 0;">
+          Queres um guia mais completo ou um itinerário feito à tua medida? Entra em contacto para desenharmos a tua viagem.
+        </p>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid-minimal">
-        <div class="footer-col">
-          <div class="footer-title">Navegação</div>
-          <div class="footer-links-vert">
-            <a href="quem-somos.html">Quem somos</a>
-            <a href="viagens.html">Próximas Viagens</a>
-            <a href="guias-e-dicas.html">Guias e Dicas</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <div class="footer-title">Contactos</div>
-          <div class="footer-links-vert">
-            <a href="https://wa.me/351963623430">WhatsApp</a>
-            <a href="mailto:info@brunutravel.pt">info@brunutravel.pt</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <div class="footer-title">Social</div>
-          <div class="footer-socials">
-            <a href="https://instagram.com/brunutravel" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom-minimal">
-        <div>© 2026 Brunu Travel</div>
-        <div class="legal-links">
-          <button id="termosBtn" class="text-btn">Termos e Condições</button> • 
-          <button id="privacidadeBtn" class="text-btn">Privacidade e Cookies</button>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <div class="overlay" id="menuOverlay"><div class="modal"><header><strong>Menu</strong><button id="menuClose">✕</button></header><div class="modal-body stack"><a href="index.html" class="pill">Home</a><a href="viagens.html" class="pill">Viagens</a><a href="quem-somos.html" class="pill">Quem Somos</a></div></div></div>
-  <div class="overlay" id="termosOverlay"><div class="modal"><header><strong>Termos</strong><button id="termosClose">✕</button></header><div class="modal-body" style="font-size:14px; color:var(--muted); line-height:1.6;">A Brunu Travel oferece conteúdos informativos...</div></div></div>
-  <div class="overlay" id="privacidadeOverlay"><div class="modal"><header><strong>Privacidade</strong><button id="privacidadeClose">✕</button></header><div class="modal-body" style="font-size:14px; color:var(--muted); line-height:1.6;">A tua privacidade é fundamental...</div></div></div>
-
-  <button class="fab" onclick="window.location.href='https://wa.me/351963623430'">
-    <i class="fa-brands fa-whatsapp"></i> Podemos ajudar?
+<button class="fab" id="chatBtn" aria-label="WhatsApp Ajuda">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="fab-text">Podemos ajudar?</span>
   </button>
 
+  <div id="app-footer"></div>
+  <div id="app-modals"></div>
+
+  <script src="assets/components.js"></script>
+  <script>
+    if(typeof loadGlobalComponents === 'function') {
+      // Passa o nome da página atual para ativar o link no menu, ex: 'index.html'
+      loadGlobalComponents('NOME_DO_TEU_FICHEIRO.html'); 
+    }
+  </script>
   <script src="assets/app.js"></script>
 </body>
 </html>
