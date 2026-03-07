@@ -1,395 +1,314 @@
-/* Brunu Travel — Production Stylesheet (Master Version) */
+/* Brunu Travel — App JS (Lógica Mestre Consolidada V2) */
+(function() {
+    const $ = (q, root = document) => root.querySelector(q);
+    const $$ = (q, root = document) => Array.from(root.querySelectorAll(q));
 
-/* --- 1. VARIÁVEIS E TEMA --- */
-:root {
-  --bg1: #041530;
-  --bg2: #0d326b;
-/*--text: #f1ebe5; (cor clara anterior do texto) */
-  --text: #ffffff;
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('bt_theme') || 'dark';
+    if (savedTheme === 'light') root.setAttribute('data-theme', 'light');
 
-  --muted: rgba(241, 235, 229, 0.65);
-  --card: rgba(255, 255, 255, 0.08);
-  --cardBorder: rgba(255, 255, 255, 0.12);
-  --shadow: rgba(0, 0, 0, 0.20);
-  --white: #ffffff;
-  --ink: #0c1220;
-  --inkMuted: rgba(12, 18, 32, 0.55);
+    function updateThemeIcon() {
+        const isLight = root.getAttribute('data-theme') === 'light';
+        const icon = $('#themeToggle i');
+        if (icon) icon.className = isLight ? 'fa-regular fa-sun' : 'fa-solid fa-moon';
+    }
 
-  --font-ui: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: "Fraunces", serif; 
+function injectPhoneContent() {
+        const modalBody = $('#phoneOverlay .modal-body');
+        if (!modalBody || modalBody.dataset.injected) return;
+        
+        modalBody.innerHTML = `
+            <div style="padding: 0 24px 24px; text-align: left;">
+                
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px;">
+                    <img src="assets/images/bruno-profile.jpg" alt="Bruno Oliveira" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                    <div style="font-size: 13px; color: #475569;">Contacto com: <strong style="color: #0c1220;">Bruno Oliveira</strong> <span style="opacity: 0.8;">(Líder de viagem)</span></div>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 12px; max-width: 360px; margin: 0 auto;">
+                    
+                    <a href="https://wa.me/351963623430" class="chat-action-btn" style="text-decoration: none; padding: 14px; background: #6b9a71; color: #ffffff; border:none; display: flex; align-items: center; justify-content: center; border-radius: 12px; transition: transform 0.2s; gap: 8px;">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> 
+                        <span style="font-weight: 600; font-size: 14.5px;">WhatsApp • Resposta mais rápida</span>
+                    </a>
+
+                    <a href="mailto:info@brunutravel.pt" class="chat-action-btn" style="text-decoration: none; padding: 14px; background: #ffffff; color: #0c1220; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; border-radius: 12px; transition: background 0.2s; gap: 8px;">
+                        <i class="fa-regular fa-envelope" style="font-size: 18px; color: #64748b;"></i> 
+                        <span style="font-weight: 600; font-size: 14.5px;">Enviar Email</span>
+                    </a>
+
+                    <a href="tel:+351963623430" class="chat-action-btn" style="text-decoration: none; padding: 14px; background: #ffffff; color: #0c1220; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; border-radius: 12px; transition: background 0.2s; gap: 8px;">
+                        <i class="fa-solid fa-phone" style="font-size: 16px; color: #64748b;"></i> 
+                        <span style="font-weight: 600; font-size: 14.5px;">Chamada Telefónica</span>
+                    </a>
+                </div>
+
+                <p style="font-size: 11.5px; color: #64748b; margin-top: 24px; margin-bottom: 0; white-space: nowrap; letter-spacing: -0.2px; text-align: center;">
+                    Respondemos normalmente em menos de 24h - incluindo fins de semana.
+                </p>
+            </div>
+        `;
+        modalBody.dataset.injected = "true";
+    }
+
+    document.addEventListener('click', (e) => {
+        const target = e.target;
+
+        if (target.closest('#themeToggle')) {
+            const isLight = root.getAttribute('data-theme') === 'light';
+            isLight ? root.removeAttribute('data-theme') : root.setAttribute('data-theme', 'light');
+            localStorage.setItem('bt_theme', isLight ? 'dark' : 'light');
+            updateThemeIcon();
+        }
+
+        // Todos os botões "Falar connosco" / "WhatsApp"
+// Todos os botões "Falar connosco" / "WhatsApp"
+if (target.closest('#phoneBtn') || target.closest('#chatBtn') || target.closest('#aboutContactBtn')) {
+    e.preventDefault();
+    injectPhoneContent();
+    $('#phoneOverlay')?.classList.add('open');
+    document.body.style.overflow = 'hidden';
 }
+        if (target.closest('#burgerBtn')) $('#menuOverlay')?.classList.add('open');
 
-[data-theme="light"] {
-  --text: #0c1220;
-  --muted: rgba(12, 18, 32, 0.65);
-  --card: rgba(255, 255, 255, 0.78);
-  --cardBorder: rgba(12, 18, 32, 0.08);
-  --shadow: rgba(12, 18, 32, 0.10);
-}
+        if (target.closest('[id$="Close"]') || target.classList.contains('overlay')) {
+            $$('.overlay').forEach(ov => ov.classList.remove('open'));
+            document.body.style.overflow = '';
+        }
 
-/* --- 2. RESETS E BASE --- */
-* { box-sizing: border-box; }
-html, body { height: 100%; overflow-x: hidden; }
-body { 
-  margin: 0; padding: 0;
-  font-family: var(--font-ui); 
-  color: var(--text); 
-  
-  /* Mantemos apenas a cor base de segurança */
-  background-color: var(--bg1); 
-  
-  min-height: 100vh; 
-  -webkit-font-smoothing: antialiased; 
-}
-h1, h2, h3, h4, p { margin: 0; padding: 0; }
-a { color: inherit; text-decoration: none; }
+// ---------------------------------------------------------
+        // LÓGICA MODAL DE VIAGENS E COLEÇÕES
+        // ---------------------------------------------------------
+        const tripCard = target.closest('.trip-card:not(.category-card):not(:has(.guide-title))');
+        const collCard = target.closest('.category-card, .collection-card');
+        
+        if (tripCard || collCard) {
+            e.preventDefault();
+            const overlay = $('#tripDetailsOverlay');
+            if (!overlay) return;
+            const source = tripCard || collCard;
+            
+            const isTrip = !!tripCard;
+            
+            const imgEl = source.querySelector('img');
+            const titleEl = source.querySelector('h3, .trip-title, .coll-title');
+            const badgeEl = source.querySelector('.badge');
+            const destEl = source.querySelector('.trip-dest, .coll-desc');
+            const infoEl = source.querySelector('.trip-info-row');
+            
+            const imgSrc = imgEl ? imgEl.src : '';
+            const title = titleEl ? titleEl.innerText : 'Detalhes';
+            const badgeText = badgeEl ? badgeEl.innerText : '';
+            const destText = destEl ? destEl.innerText : '';
+            const infoText = infoEl ? infoEl.innerText : '';
+            
+            const imgRatio = isTrip ? '9/16' : '16/9';
+            const imgMaxHeight = isTrip ? '400px' : '200px'; 
 
-.container { width: 100%; max-width: 1168px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; }
+            $('#tripModalTitle').innerText = title;
+            
+            const badgeHTML = badgeText ? `<div style="position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,0.95); color: #0c1220; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">${badgeText}</div>` : '';
+            
+            let html = `
+                <div style="padding: 0 24px 24px; text-align: left;">
+                    <div style="position: relative; width: 100%; border-radius: 16px; overflow: hidden; margin-bottom: 16px; border: 1px solid #f1f5f9;">
+                        <img src="${imgSrc}" style="width: 100%; max-height: ${imgMaxHeight}; aspect-ratio: ${imgRatio}; object-fit: cover; display: block;">
+                        ${badgeHTML}
+                    </div>
+            `;
+            
+            if (isTrip) {
+                html += `
+                    <h3 style="font-family: var(--font-display); font-size: 18px; color: #0c1220; margin: 0 0 4px 0;">${destText}</h3>
+                    <p style="font-size: 13.5px; color: #475569; margin: 0 0 20px 0;">${infoText}</p>
+                `;
+            } else {
+                html += `
+                    <h3 style="font-family: var(--font-display); font-size: 18px; color: #0c1220; margin: 0 0 20px 0;">${destText}</h3>
+                `;
+            }
 
-/* --- 3. HEADER GLOBAL --- */
-header.site-header { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 1px solid rgba(12,18,32,.06); }
-.header-inner { height: 78px; display: flex; align-items: center; justify-content: space-between; }
-.brand { display: flex; align-items: center; gap: 14px; color: var(--ink); }
-.brand .logo-wrap { width: 50px; height: 50px; border-radius: 999px; background: #fff; display: grid; place-items: center; box-shadow: 0 4px 12px rgba(12,18,32,.08); border: 1px solid rgba(12,18,32,.08); }
-.brand img { width: 38px; height: 38px; border-radius: 999px; object-fit: contain; }
-.brand .brand-lines { display: flex; flex-direction: column; line-height: 1.1; }
-.brand .brand-name { font-weight: 600; font-size: 14px; letter-spacing: -0.01em; }
-.brand .brand-tag { font-weight: 400; font-size: 11px; color: var(--inkMuted); margin-top: 3px; }
-.nav { display: flex; gap: 20px; color: var(--inkMuted); font-size: 13px; font-weight: 500; }
-.nav a { padding: 8px; transition: color 0.2s; }
-.nav a:hover { color: var(--ink); }
-.nav a[aria-current="page"] { color: var(--ink); font-weight: 600; }
-.header-actions { display: flex; gap: 10px; align-items: center; }
-.pill, .icon-btn { height: 38px; border-radius: 99px; border: 1px solid rgba(12,18,32,.08); background: #fff; cursor: pointer; color: var(--ink); font-size: 13px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-.pill { padding: 0 16px; font-weight: 500; gap: 8px; }
-.icon-btn { width: 38px; }
-.pill:hover, .icon-btn:hover { background: rgba(12,18,32,.04); }
+            html += `
+                    <h4 style="font-family: var(--font-display); font-size: 17px; color: #0c1220; margin: 0 0 4px 0;">Queres saber mais sobre esta viagem?</h4>
+                    <p style="font-size: 13.5px; color: #475569; margin: 0 0 16px 0;">Também fazemos viagens privadas com líder.</p>
 
-/* --- 4. FAB WHATSAPP --- */
-.fab { position: fixed; right: max(24px, calc(50vw - 560px)); bottom: 40px; display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 99px; background: #25D366; border: none; color: #fff; cursor: pointer; box-shadow: 0 8px 24px rgba(37,211,102,.3); z-index: 90; transition: transform 0.2s ease; }.fab:hover { transform: translateY(-3px); }
-.fab i { font-size: 20px; }
-.fab-text { font-family: var(--font-ui); font-weight: 500; font-size: 13px; letter-spacing: -0.01em; }
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                        <img src="assets/images/bruno-profile.jpg" alt="Bruno Oliveira" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                        <div style="font-size: 13px; color: #475569;">Contacto com: <strong style="color: #0c1220;">Bruno Oliveira</strong> <span style="opacity: 0.8;">(Líder de viagem)</span></div>
+                    </div>
 
-/* --- 5. CHIPS NAVEGAÇÃO / TEMAS --- */
-.theme-chips-wrapper { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-.theme-chip { display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; border-radius: 99px; border: 1px solid var(--cardBorder); background: rgba(255,255,255,0.03); color: var(--text); font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.2s ease; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-[data-theme="light"] .theme-chip { background: rgba(12,18,32,0.03); }
-.theme-chip:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); border-color: rgba(255,255,255,0.3); }
+                    <a href="https://wa.me/351963623430" class="chat-action-btn" style="text-decoration: none; padding: 14px; background: #6b9a71; color: #ffffff; border:none; display: flex; align-items: center; justify-content: center; border-radius: 12px; transition: transform 0.2s; gap: 8px; max-width: 360px; margin: 0 auto;">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> 
+                        <span style="font-weight: 600; font-size: 15px;">WhatsApp</span>
+                    </a>
+                    
+					<p style="font-size: 11.5px; color: #64748b; margin-top: 16px; margin-bottom: 0; white-space: nowrap; letter-spacing: -0.2px; text-align: center;">
+  					  Respondemos normalmente em menos de 24h - incluindo fins de semana.
+					</p>
+                </div>
+            `;
+            
+            $('#tripModalBody').innerHTML = html;
+            
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
 
-/* --- 6. PÁGINA HOME --- */
-main { padding: 50px 0; }
-.hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; padding: 40px 0; }
-.hero-left { max-width: 600px; }
-.hero-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(28px, 3.5vw, 42px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 20px 0; }
-.hero-sub { font-weight: 500; font-size: 20px; color: var(--text); margin: 0 0 16px 0; letter-spacing: -0.01em; }
-.hero-sub span { display: inline; opacity: 0.8; } 
-.hero-p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; max-width: 520px; font-weight: 400; }
-.hero-right { display: flex; justify-content: flex-end; }
-.bio-card { width: 100%; max-width: 400px; background: var(--card); border: 1px solid var(--cardBorder); border-radius: 24px; padding: 30px 24px; box-shadow: 0 24px 60px var(--shadow); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-.bio-top { display: flex; flex-direction: column; align-items: center; padding-bottom: 20px; }
-.avatar { width: 80px; height: 80px; border-radius: 999px; object-fit: cover; border: 2px solid rgba(255,255,255,.1); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
-.bio-name { margin-top: 14px; font-weight: 600; font-size: 18px; letter-spacing: -0.01em; }
-.actions { display: flex; flex-direction: column; gap: 10px; }
-.big-btn { height: 54px; border-radius: 16px; border: 1px solid var(--cardBorder); background: rgba(255,255,255,0.03); color: var(--text); display: flex; align-items: center; justify-content: space-between; padding: 0 18px; text-decoration: none; font-weight: 500; font-size: 14px; transition: all 0.2s ease; }
-.big-btn:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
-.big-left { display: flex; align-items: center; gap: 14px; }
-.big-ico { opacity: 0.7; font-size: 16px; width: 20px; text-align: center; }
-.big-arrow { font-size: 18px; opacity: 0.4; padding-right: 4px; transition: transform 0.2s; font-weight: 400; }
-.big-btn:hover .big-arrow { transform: translateX(4px); opacity: 0.9; }
-.small-title { margin: 24px 4px 12px; color: var(--muted); font-weight: 600; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; }
-.social-row { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
-.social-row .social { font-size: 18px; opacity: 0.5; transition: all 0.2s ease; color: var(--text); text-decoration: none; }
-.social-row .social:hover { opacity: 1; transform: scale(1.15); }
-.handle { text-align: center; margin-top: 12px; font-size: 12px; opacity: 0.35; font-weight: 500; letter-spacing: 0.02em; }
+        // ---------------------------------------------------------
+        // LÓGICA MODAL DE GUIAS
+        // ---------------------------------------------------------
+        const guideCard = target.closest('.trip-card:has(.guide-title)');
+        if (guideCard && !target.closest('.guide-premium-btn')) {
+            e.preventDefault();
+            e.stopPropagation();
 
-/* --- 7. PÁGINAS VIAGENS / GUIAS (Carrossel e Layout Mestre) --- */
-.page-trips { padding-top: 0; }
-.page-title { font-family: var(--font-display); font-size: clamp(32px, 4vw, 42px); font-weight: 400; margin: 0 0 10px 0; letter-spacing: -0.02em; }
-.page-subtitle { color: var(--muted); font-size: 16px; font-weight: 300; line-height: 1.6; max-width: 600px; margin: 0; }
+            const overlay = $('#guideDetailsOverlay');
+            if (!overlay) return;
+            
+            const imgEl = guideCard.querySelector('img');
+            const titleEl = guideCard.querySelector('.guide-title');
+            const subEl = guideCard.querySelector('.guide-sub');
+            
+            const imgSrc = imgEl ? imgEl.src : '';
+            const title = titleEl ? titleEl.innerText : 'Guia de Viagem';
+            const sub = subEl ? subEl.innerText : '';
+            
+            const isAvailable = !sub.toLowerCase().includes('em breve');
+            let badgeText = title.replace(/Guia de /i, '').replace(/·/g, '•').toUpperCase();
+            
+            let socialLinksHtml = '';
+            const socialsSource = guideCard.querySelector('.guide-social');
+            if (socialsSource && isAvailable) {
+                // Ícones ligeiramente mais pequenos para caberem bem ao lado do texto
+                const links = Array.from(socialsSource.querySelectorAll('a')).map(a => {
+                    const cloned = a.cloneNode(true);
+                    cloned.style.cssText = 'width: 34px; height: 34px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 50%; display: grid; place-items: center; color: #475569; font-size: 15px; text-decoration: none; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02);';
+                    return cloned.outerHTML;
+                }).join('');
+                socialLinksHtml = links;
+            }
+            
+            let html = `
+                <div style="padding: 0 24px 24px; text-align: left;">
+                    
+                    <div style="position: relative; width: 100%; border-radius: 16px; overflow: hidden; margin-bottom: 16px; border: 1px solid #f1f5f9;">
+                        <img src="${imgSrc}" style="width: 100%; max-height: 220px; aspect-ratio: 4/3; object-fit: cover; display: block;">
+                        <div style="position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,0.95); color: #0c1220; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-transform: uppercase; letter-spacing: 0.05em;">${badgeText}</div>
+                    </div>
+                    
+                    <h3 style="font-family: var(--font-display); font-size: 22px; color: #0c1220; margin: 0 0 4px 0;">${title}</h3>
+                    <p style="font-size: 13.5px; color: #64748b; margin: 0 0 24px 0;">Guia Essencial</p>
+            `;
+            
+            if (isAvailable) {
+                html += `
+                    <div style="background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 16px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="font-size: 13px; font-weight: 600; color: #0c1220;">Disponível nas redes</div>
+                        <div style="display: flex; gap: 8px;">
+                            ${socialLinksHtml}
+                        </div>
+                    </div>
 
-.trips-section { margin-bottom: 40px; }
-.section-header-flex { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 16px; }
-.section-title { font-family: var(--font-display); font-size: 26px; font-weight: 400; margin: 0 0 6px 0; letter-spacing: -0.01em;}
-.section-subtitle { color: var(--muted); font-size: 14px; font-weight: 300; margin: 0; }
+                    <div style="background: #edf2f0; border: 1px solid #e2e8e4; border-radius: 16px; padding: 16px; margin-bottom: 24px; position: relative; overflow: hidden;">
+                        <h4 style="font-family: var(--font-display); font-size: 16px; color: #0c1220; margin: 0 0 4px 0;">Queres a versão Premium?</h4>
+                        <p style="font-size: 11.5px; color: #475569; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: relative; z-index: 2;">Mais completa, com recomendações e extras úteis para a viagem.</p>
+                        <i class="fa-solid fa-map-location-dot" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 40px; color: #6b9a71; opacity: 0.15; z-index: 1;"></i>
+                    </div>
 
-.premium-slider-wrapper { width: 100%; position: relative; }
-.nav-arrow { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: #fff; display: grid; place-items: center; cursor: pointer; transition: all 0.2s ease; font-size: 16px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-.nav-arrow:hover { background: rgba(0,0,0,0.6); transform: translateY(-50%) scale(1.05); }
-.floating-left, .floating-right { position: absolute; top: 40%; transform: translateY(-50%); z-index: 10; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-.floating-left { left: 10px; }
-.floating-right { right: 10px; }
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                        <img src="assets/images/bruno-profile.jpg" alt="Bruno Oliveira" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                        <div style="font-size: 13px; color: #475569;">Contacto com: <strong style="color: #0c1220;">Bruno Oliveira</strong> <span style="opacity: 0.8;">(Líder de viagem)</span></div>
+                    </div>
 
-.slider-track { display: flex; gap: 20px; width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; padding-bottom: 16px; margin: 0; }
-.slider-track::-webkit-scrollbar { display: none; }
+                    <a href="https://wa.me/351963623430?text=${encodeURIComponent('Olá Bruno, queria saber mais sobre a versão Premium do Guia de ' + badgeText)}" class="chat-action-btn" style="text-decoration: none; padding: 14px; background: #6b9a71; color: #ffffff; border:none; display: flex; align-items: center; justify-content: center; border-radius: 12px; transition: transform 0.2s; gap: 8px; max-width: 360px; margin: 0 auto;">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> 
+                        <span style="font-weight: 600; font-size: 14.5px;">WhatsApp • Saber mais sobre o Premium</span>
+                    </a>
+                `;
+            } else {
+                html += `
+                    <div style="background: #fff8eb; border: 1px solid #fde68a; border-radius: 12px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px;">
+                        <div style="background: #f59e0b; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; font-size: 12px;"><i class="fa-regular fa-clock"></i></div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #92400e; margin-bottom: 2px;">Em breve</div>
+                            <div style="font-size: 13px; color: #b45309; line-height: 1.4;">Estamos a preparar o guia essencial.</div>
+                        </div>
+                    </div>
 
-.trip-card { flex: 0 0 210px; margin: 0; padding: 0; scroll-snap-align: start; cursor: pointer; }
-.trip-card-link { display: flex; flex-direction: column; height: 100%; }
+                    <h4 style="font-family: var(--font-display); font-size: 18px; color: #0c1220; margin: 0 0 6px 0;">Queres ser informado quando estiver pronto?</h4>
+                    <p style="font-size: 13.5px; color: #475569; margin: 0 0 20px 0;">Fala connosco e avisamos-te assim que sair.</p>
 
-.trip-frame { position: relative; width: 100%; aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; margin-bottom: 16px; box-shadow: 0 14px 40px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.06); background: var(--bg1); }
-.trip-frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
-.trip-card:hover .trip-frame img { transform: scale(1.05); }
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                        <img src="assets/images/bruno-profile.jpg" alt="Bruno Oliveira" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                        <div style="font-size: 13px; color: #475569;">Contacto com: <strong style="color: #0c1220;">Bruno Oliveira</strong> <span style="opacity: 0.8;">(Líder de viagem)</span></div>
+                    </div>
 
-.trip-gradient-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%); pointer-events: none; z-index: 1; }
+                    <a href="https://wa.me/351963623430?text=${encodeURIComponent('Olá Bruno, queria ser informado quando o Guia de ' + badgeText + ' estiver disponível!')}" class="chat-action-btn" style="text-decoration: none; padding: 14px; background: #6b9a71; color: #ffffff; border:none; display: flex; align-items: center; justify-content: center; border-radius: 12px; transition: transform 0.2s; gap: 8px; max-width: 360px; margin: 0 auto;">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> 
+                        <span style="font-weight: 600; font-size: 14.5px;">WhatsApp • Quero ser informado</span>
+                    </a>
+                `;
+            }
 
-.badge { position: absolute; top: 14px; left: 14px; z-index: 2; background: rgba(255,255,255,0.95); color: #0c1220; padding: 4px 6px; border-radius: 6px; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 4px 12px rgba(0,0,0,0.2); max-width: calc(100% - 28px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            html += `
+				<p style="font-size: 11.5px; color: #64748b; margin-top: 16px; margin-bottom: 0; white-space: nowrap; letter-spacing: -0.2px; text-align: center;">
+ 				   Respondemos normalmente em menos de 24h - incluindo fins de semana.
+				</p>
+                </div>
+            `;
+            
+            $('#guideModalBody').innerHTML = html;
+            
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+    });
 
-.trip-content-inside { position: absolute; bottom: 20px; left: 16px; right: 16px; z-index: 2; color: #fff; }
-.trip-title { font-family: var(--font-display); font-size: 20px; font-weight: 400; margin: 0 0 4px 0; letter-spacing: -0.01em; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-.trip-dest { font-size: 11px; font-weight: 500; margin: 0; line-height: 1.4; opacity: 0.95; }
-.trip-content-outside { padding: 0 4px; }
-.trip-info-row { font-size: 13px; font-weight: 500; color: var(--text); margin: 0 0 6px 0; }
-.trip-leader { font-size: 11px; color: var(--muted); font-style: italic; margin: 0; opacity: 0.85; }
+    function initCarousels() {
+        $$('.trips-carousel, .slider-track').forEach(carousel => {
+            const section = carousel.closest('section');
+            if (!section) return;
 
-/* Hitbox melhorado para cliques perfeitos */
-.pagination-wrapper { display: flex; justify-content: center; margin-top: 16px; }
-.pagination-lines { display: flex; gap: 8px; width: 100%; max-width: 180px; }
-.page-line { height: 24px; flex: 1; cursor: pointer; display: flex; align-items: center; }
-.page-line::after { content: ''; display: block; width: 100%; height: 4px; background: var(--cardBorder); border-radius: 4px; transition: all 0.3s ease; }
-.page-line.active::after { background: var(--text); opacity: 0.9; }
-/* --- COMPONENTES EDITORIAIS (GUIAS) --- */
-.guide-frame { 
-  position: relative; 
-  width: 100%; 
-  aspect-ratio: 9 / 16; 
-  border-radius: 12px; 
-  overflow: hidden; 
-  margin-bottom: 16px; 
-  box-shadow: 0 14px 40px rgba(0,0,0,0.15); 
-  border: 1px solid var(--cardBorder); 
-  background: var(--bg1); 
-  cursor: pointer; /* Indica que é clicável */
-}
-.guide-frame::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0);
-  transition: background 0.3s ease;
-  pointer-events: none;
-}
-.guide-frame:hover::after {
-  background: rgba(255,255,255,0.05); /* Brilho subtil ao passar o rato */
-}
-.guide-frame img { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
-}
-.trip-card:hover .guide-frame img { 
-  transform: scale(1.05); 
-}
-/* Título com proteção anti-quebra (Ellipsis) */
-.guide-title { 
-  font-family: var(--font-display); 
-  font-size: 16px; /* Ligeiramente mais pequeno */
-  font-weight: 600; 
-  margin: 0 0 4px 0; 
-  color: var(--text); 
-  letter-spacing: -0.01em; 
-  white-space: nowrap; /* Força a ficar numa linha */
-  overflow: hidden; 
-  text-overflow: ellipsis; /* Adiciona "..." se não couber */
-}
+            const linesContainer = section.querySelector('.pagination-lines');
+            const cards = $$('.trip-card', carousel);
+            
+            if (!linesContainer || cards.length === 0) return;
 
-.guide-sub { font-size: 13px; color: var(--muted); margin: 0 0 12px 0; font-weight: 500; }
-.guide-social { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--text); margin-bottom: 12px; font-weight: 500; }
-.guide-social span { opacity: 0.6; }
-.guide-social a { color: var(--text); font-size: 16px; transition: opacity 0.2s, transform 0.2s; opacity: 0.6; text-decoration: none; }
-.guide-social a:hover { opacity: 1; transform: translateY(-2px); }
+            linesContainer.innerHTML = '';
+            cards.forEach((card) => {
+                const line = document.createElement('div');
+                line.className = 'page-line';
+                line.onclick = () => carousel.scrollTo({ left: card.offsetLeft - 20, behavior: 'smooth' });
+                linesContainer.appendChild(line);
+            });
 
-/* Novo botão elegante em vez do verde berrante */
-.guide-premium-btn { 
-  display: inline-flex; 
-  align-items: center; 
-  font-size: 13px; 
-  font-weight: 600; 
-  color: var(--text); 
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: opacity 0.2s; 
-  opacity: 0.7;
-  font-family: inherit;
-}
-.guide-premium-btn:hover { opacity: 1; }
-.guide-premium-btn span { transition: transform 0.2s; margin-left: 6px; }
-.guide-premium-btn:hover span { transform: translateX(4px); }
-/* --- 8. SECÇÃO COLEÇÕES --- */
-.categories-section { margin-bottom: 24px; }
-.category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.collection-card { display: flex; flex-direction: column; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 14px; transition: transform 0.2s, background 0.2s; cursor: pointer; text-decoration: none; }
-.collection-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.06); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-.coll-img-box { width: 100%; height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
-.coll-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-.collection-card:hover .coll-img-box img { transform: scale(1.05); }
-.coll-content { padding: 0 4px 4px; }
-.coll-title { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin: 0 0 6px 0; letter-spacing: -0.01em;}
-.coll-desc { font-size: 12px; font-weight: 400; color: var(--muted); margin: 0; line-height: 1.4; opacity: 0.85;}
+            const updateUI = () => {
+                const lines = $$('.page-line', linesContainer);
+                cards.forEach((card, i) => {
+                    const rect = card.getBoundingClientRect();
+                    const track = carousel.getBoundingClientRect();
+                    const isVisible = (rect.left >= track.left - 50 && rect.right <= track.right + 50);
+                    if (isVisible && lines[i]) lines[i].classList.add('active');
+                    else if (lines[i]) lines[i].classList.remove('active');
+                });
+            };
 
-/* --- 9. PÁGINA QUEM SOMOS --- */
-.page-about { padding-top: 0; }
-.about-hero { margin-top: 40px; margin-bottom: 60px; }
-.about-section { margin-bottom: 80px; }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-.about-text-block p { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
-.about-text-block p:first-of-type { font-size: 18px; color: var(--text); font-weight: 500; }
-.about-traits { background: var(--card); border: 1px solid var(--cardBorder); border-radius: 20px; padding: 30px; }
-.traits-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
-.traits-list li { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 500; color: var(--text); }
-.traits-list i { color: #25D366; font-size: 16px; }
-.founder-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
-.founder-image-wrapper { width: 100%; }
-.founder-img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 24px; border: 1px solid var(--cardBorder); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
-.badge-inline { display: inline-block; background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; border: 1px solid var(--cardBorder); }
-.founder-text-block p { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
-.vmv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.vmv-card { background: var(--card); border: 1px solid var(--cardBorder); border-radius: 20px; padding: 32px 24px; display: flex; flex-direction: column; align-items: flex-start; transition: transform 0.2s; }
-.vmv-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.2); }
-.vmv-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--cardBorder); display: grid; place-items: center; font-size: 20px; color: var(--text); margin-bottom: 20px; }
-.vmv-title { font-family: var(--font-display); font-size: 22px; font-weight: 400; margin: 0 0 12px 0; letter-spacing: -0.01em; }
-.vmv-text { font-size: 14px; color: var(--muted); line-height: 1.6; margin: 0; }
-.about-cta-banner { background: linear-gradient(135deg, var(--card), rgba(255,255,255,0.02)); border: 1px solid var(--cardBorder); border-radius: 24px; padding: 60px 40px; display: flex; flex-direction: column; align-items: center; }
-.text-center { text-align: center; }
-.cta-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-.outline-btn { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--text); text-decoration: none; padding: 0 24px; height: 48px; border-radius: 99px; font-weight: 600; font-size: 14px; border: 1px solid var(--cardBorder); transition: background 0.2s; }
-.outline-btn:hover { background: var(--card); }
+            carousel.addEventListener('scroll', updateUI);
+            
+            const next = section.querySelector('.next-btn, .floating-right, #nextTrip, #nextBtn');
+            const prev = section.querySelector('.prev-btn, .floating-left, #prevTrip, #prevBtn');
+            
+            if (next) next.onclick = () => carousel.scrollBy({ left: 300, behavior: 'smooth' });
+            if (prev) prev.onclick = () => carousel.scrollBy({ left: -300, behavior: 'smooth' });
+            
+            updateUI();
+        });
+    }
 
-/* --- 10. FOOTER MINIMALISTA --- */
-.site-footer { padding: 32px 0 80px; border-top: 1px solid var(--cardBorder); margin-top: 0; }
-.footer-grid-minimal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
-.footer-col { display: flex; flex-direction: column; }
-.footer-title { font-size: 13px; font-weight: 600; margin: 0 0 8px 0; color: var(--text); opacity: 0.9; text-transform: none; letter-spacing: 0.02em; }
-.footer-links-vert { display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--muted); }.footer-links-vert a { transition: color 0.2s; text-decoration: none; }
-.footer-links-vert a:hover { color: var(--text); }
-.footer-socials { display: flex; gap: 16px; font-size: 18px; margin-top: 4px; }
-.footer-socials a { transition: color 0.2s, transform 0.2s; color: var(--muted); }
-.footer-socials a:hover { color: var(--text); transform: translateY(-2px); }
-.footer-bottom-minimal { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 12px; color: var(--muted); padding-right: 180px; }.legal-links { display: flex; align-items: center; gap: 12px; }
-.text-btn { background: none; border: none; color: var(--muted); font-family: inherit; font-size: 13px; cursor: pointer; padding: 0; transition: color 0.2s; text-decoration: none; }
-.text-btn:hover { color: var(--text); }
-.dot-sep { opacity: 0.5; font-size: 10px; }
-
-/* Responsividade do Footer */
-@media (max-width: 768px) {
-  .footer-grid-minimal { grid-template-columns: 1fr; gap: 32px; }
-  .footer-bottom-minimal { flex-direction: column-reverse; align-items: flex-start; }
-}
-
-/* --- 11. MODALS E OVERLAYS --- */
-.overlay { position: fixed; inset: 0; background: rgba(4,21,48,.8); display: none; align-items: center; justify-content: center; padding: 24px; z-index: 200; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-.overlay.open { display: flex; }
-.modal { width: min(420px, 100%); background: var(--bg1); border-radius: 24px; box-shadow: 0 24px 70px rgba(0,0,0,.4); border: 1px solid var(--cardBorder); overflow: hidden; color: var(--text); }
-[data-theme="light"] .modal { background: var(--white); }
-.modal header { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--cardBorder); background: var(--bg1); }
-.modal header strong { font-size: 14px; letter-spacing: .01em; }
-.modal header button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--cardBorder); background: transparent; color: var(--text); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-.modal header button:hover { background: rgba(255,255,255,0.1); }
-.modal .modal-body { padding: 16px; }
-.modal .modal-link { display: flex; align-items: center; padding: 16px; border-radius: 12px; font-weight: 500; font-size: 15px; transition: background 0.2s; text-decoration: none; color: var(--text); }
-.modal .modal-link:hover { background: rgba(255,255,255,0.05); }
-.modal .stack { display: flex; flex-direction: column; gap: 8px; }
-.chat-action-btn { background: #25D366; color: #fff; padding: 16px; border-radius: 16px; text-align: center; font-weight: 600; font-size: 15px; display: flex; justify-content: center; align-items: center; gap: 10px; transition: transform 0.2s; text-decoration: none; border: none; cursor: pointer; }
-.chat-action-btn:hover { transform: translateY(-2px); }
-
-/* --- 12. RESPONSIVIDADE --- */
-@media (max-width: 980px) {
-  .nav { display: none; }
-  .hero { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-  .hero-left { max-width: 100%; margin: 0 auto; }
-  .hero-title { font-size: clamp(32px, 5vw, 40px); }
-  .hero-p { margin: 0 auto; }
-  .hero-right { justify-content: center; }
-  .bio-card { max-width: 480px; }
-  .about-grid, .founder-grid, .vmv-grid, .category-grid { grid-template-columns: 1fr; gap: 40px; }
-  .founder-image-wrapper { order: -1; max-width: 400px; margin: 0 auto; }
-}
-@media (max-width: 768px) {
-  .footer-grid-minimal { grid-template-columns: 1fr; gap: 30px; text-align: left; }
-  .footer-bottom-minimal { flex-direction: column; align-items: flex-start; }
-}
-@media (max-width: 520px) {
-  .pill { display: none; } 
-  .header-actions { gap: 6px; }
-  .bio-card { padding: 24px 16px; border-radius: 20px;}
-  .fab { right: 20px; bottom: 20px; padding: 12px; }
-  .fab-text { display: none; } 
-  .trip-card { flex: 0 0 240px; }
-}
-
-/* --- FUNDO PARCIAL DA HERO --- */
-/* Garante que o texto fica sobreposto e o fundo não sai da coluna */
-.hero-left {
-  position: relative;
-  z-index: 1; 
-  overflow: hidden; 
-}
-
-/* --- FUNDO PARCIAL DA HERO --- */
-.hero {
-  position: relative;
-  z-index: 1; 
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  
-  /* Ajusta estes valores no teu navegador primeiro */
-  bottom: 50px; 
-  left: 190px; 
-  width: 40%; 
-  height: 80%; 
-  
-  background-image: url('images/bg-linhas.png'); 
-  background-repeat: no-repeat;
-  background-size: contain; 
-  background-position: bottom left; 
-  
-  z-index: -1; 
-  opacity: 0.35; 
-  pointer-events: none; 
-}
-
-/* --- NOVA ESTRUTURA QUEM SOMOS (V3) --- */
-.text-center { text-align: center; }
-
-/* Secção do Fundador */
-.founder-grid-new { 
-  display: grid; 
-  grid-template-columns: 1fr 1fr; 
-  gap: 60px; 
-  align-items: center; 
-}
-.founder-img-wrap img { 
-  width: 100%; 
-  aspect-ratio: 16 / 11; /* Formato panorâmico elegante como na foto de inspiração */
-  object-fit: cover; 
-  border-radius: 20px; 
-  border: 1px solid var(--cardBorder); 
-  box-shadow: 0 24px 60px rgba(0,0,0,0.3); 
-}
-.founder-text p { 
-  font-size: 15.5px; 
-  color: var(--muted); 
-  line-height: 1.7; 
-  margin-bottom: 16px; 
-}
-
-/* Secção de Valores (4 colunas) */
-.values-grid-4 { 
-  display: grid; 
-  grid-template-columns: repeat(4, 1fr); 
-  gap: 24px; 
-}
-
-/* Responsividade Específica */
-@media (max-width: 980px) {
-  .founder-grid-new { grid-template-columns: 1fr; gap: 40px; }
-  .values-grid-4 { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
-  .values-grid-4 { grid-template-columns: 1fr; }
-  .founder-img-wrap img { aspect-ratio: 4 / 3; }
-}
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            initCarousels();
+            updateThemeIcon();
+        }, 300);
+    });
+})();
