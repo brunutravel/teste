@@ -2,55 +2,29 @@
 <html lang="pt">
 <head>
   <meta charset="utf-8">
-  <title>Viagens de Grupo • Brunu Travel</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Viagens de grupo • Brunu Travel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <div class="logo-wrap"><img src="assets/images/logo.jpg" alt="Logo"></div>
-        <div class="brand-lines">
-          <div class="brand-name">Brunu Travel</div>
-          <div class="brand-tag">Viagens de grupo</div>
-        </div>
-      </a>
-      <nav class="nav">
-        <a href="quem-somos.html">Quem somos</a>
-        <a href="viagens.html" aria-current="page">Viagens de grupo</a>
-        <a href="guias-e-dicas.html">Guias e Dicas</a>
-      </nav>
-      <div class="header-actions">
-        <button class="pill" id="phoneBtn">🇵🇹 (+351) 963 623 430</button>
-        <button class="icon-btn" id="burgerBtn"><i class="fa-solid fa-bars-staggered"></i></button>
-      </div>
-    </div>
-  </header>
+  <div id="app-header"></div>
 
-  <main>
-    <section class="container" style="padding: 60px 0 20px;">
-      <h1 class="page-title" style="font-family: var(--font-display); font-size: clamp(32px, 5vw, 42px); margin-bottom: 12px;">Viagens de grupo</h1>
-      <p class="page-subtitle" style="color: var(--muted); font-size: 18px; max-width: 600px;">Pequenos grupos, planeamento sólido e boa energia.</p>
+  <main class="page-trips">
+    <section class="container" style="margin-top: 40px; margin-bottom: 30px;">
+      <h1 class="page-title">Viagens de grupo</h1>
+      <p class="page-subtitle">Pequenos grupos, planeamento sólido e boa energia.</p>
     </section>
 
-    <section class="container">
-      <div class="theme-chips-wrapper">
-        <a href="#sol" class="theme-chip">Sol & Praia</a>
-        <a href="#cultura" class="theme-chip">Cultura & Cidades</a>
-        <a href="#desporto" class="theme-chip">Desporto</a>
-        <a href="#grandes" class="theme-chip">Grandes Viagens</a>
-      </div>
-    </section>
-
-    <section class="container trips-section" style="padding-bottom: 80px;">
-      <div class="section-header-flex" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px;">
+    <section class="container trips-section">
+      <div class="section-header-flex">
         <div>
-          <h2 class="section-title" style="font-family: var(--font-display); font-size: 26px;">Próximas viagens</h2>
-          <p class="section-subtitle" style="color: var(--muted); font-size: 14px;">Grupos reduzidos. Lugares limitados.</p>
+          <h2 class="section-title">Próximas viagens</h2>
+          <p class="section-subtitle">Grupos reduzidos. Lugares limitados.</p>
         </div>
       </div>
 
@@ -59,154 +33,226 @@
         <button id="nextBtn" class="nav-arrow floating-right" aria-label="Seguinte"><i class="fa-solid fa-chevron-right"></i></button>
         
         <div class="slider-track" id="tripsCarousel">
-          <article class="trip-card">
-            <div class="trip-frame">
-              <img src="assets/images/f1.jpg" alt="Formula 1">
-              <div class="badge">Julho 2026</div>
-              <div class="trip-content-inside">
-                <h3 class="trip-title">Formula 1</h3>
-                <p style="font-size: 11px; opacity: 0.9;">Spa • Mónaco • Barcelona</p>
-              </div>
-            </div>
-            <div class="trip-content-outside" style="margin-top:12px;">
-              <p style="font-size: 13px; font-weight: 500;">4 dias • Pequeno grupo</p>
-              <p style="font-size: 12px; color: var(--muted); font-style: italic;">Líder: Bruno Oliveira</p>
-            </div>
-          </article>
-
-          <article class="trip-card">
-            <div class="trip-frame">
-              <img src="assets/images/ibiza.jpg" alt="Ibiza">
-              <div class="badge">Julho 2026</div>
-              <div class="trip-content-inside">
-                <h3 class="trip-title">Ibiza</h3>
-                <p style="font-size: 11px; opacity: 0.9;">Beach • Music • Calas</p>
-              </div>
-            </div>
-            <div class="trip-content-outside" style="margin-top:12px;">
-              <p style="font-size: 13px; font-weight: 500;">3 dias • Pequeno grupo</p>
-              <p style="font-size: 12px; color: var(--muted); font-style: italic;">Líder: Bruno Oliveira</p>
-            </div>
-          </article>
-
-          <article class="trip-card">
-            <div class="trip-frame">
-              <img src="assets/images/malta.jpg" alt="Malta">
-              <div class="badge">Setembro 2026</div>
-              <div class="trip-content-inside">
-                <h3 class="trip-title">Malta</h3>
-                <p style="font-size: 11px; opacity: 0.9;">Sol • História • Lagoa Azul</p>
-              </div>
-            </div>
-            <div class="trip-content-outside" style="margin-top:12px;">
-              <p style="font-size: 13px; font-weight: 500;">6 dias • Pequeno grupo</p>
-              <p style="font-size: 12px; color: var(--muted); font-style: italic;">Líder: Bruno Oliveira</p>
-            </div>
-          </article>
-
-          <article class="trip-card">
-            <div class="trip-frame">
-              <img src="assets/images/china.jpg" alt="China">
-              <div class="badge">Setembro 2026</div>
-              <div class="trip-content-inside">
-                <h3 class="trip-title">China</h3>
-                <p style="font-size: 11px; opacity: 0.9;">Beijing • Chengdu • Chongqing</p>
-              </div>
-            </div>
-            <div class="trip-content-outside" style="margin-top:12px;">
-              <p style="font-size: 13px; font-weight: 500;">12 dias • Pequeno grupo</p>
-              <p style="font-size: 12px; color: var(--muted); font-style: italic;">Líder: Bruno Oliveira</p>
-            </div>
-          </article>
           
-          </div>
-      </div>
+          <article class="trip-card">
+            <a href="#" class="trip-card-link">
+              <div class="trip-frame">
+                <img src="assets/images/f1.jpg" alt="Formula 1" loading="lazy">
+                <div class="trip-gradient-overlay"></div>
+                <div class="badge">A partir de Julho 2026</div>
+                <div class="trip-content-inside">
+                  <h3 class="trip-title">Formula 1</h3>
+                  <p class="trip-dest">Spa • Monaco • Barcelona</p>
+                </div>
+              </div>
+              <div class="trip-content-outside">
+                <div class="trip-info-row">4 dias • Pequeno grupo</div>
+                <div class="trip-leader">Líder: Bruno Oliveira</div>
+              </div>
+            </a>
+          </article>
 
-      <div class="pagination-wrapper">
-        <div class="pagination-lines" id="paginationLines"></div>
+          <article class="trip-card">
+            <a href="#" class="trip-card-link">
+              <div class="trip-frame">
+                <img src="assets/images/ibiza.jpg" alt="Ibiza" loading="lazy">
+                <div class="trip-gradient-overlay"></div>
+                <div class="badge">A partir de Julho 2026</div>
+                <div class="trip-content-inside">
+                  <h3 class="trip-title">Ibiza</h3>
+                  <p class="trip-dest">Music • Beach • Calas</p>
+                </div>
+              </div>
+              <div class="trip-content-outside">
+                <div class="trip-info-row">3 dias • Pequeno grupo</div>
+                <div class="trip-leader">Líder: Bruno Oliveira</div>
+              </div>
+            </a>
+          </article>
+
+          <article class="trip-card">
+            <a href="#" class="trip-card-link">
+              <div class="trip-frame">
+                <img src="assets/images/malta.jpg" alt="Malta" loading="lazy">
+                <div class="trip-gradient-overlay"></div>
+                <div class="badge">Setembro 2026</div>
+                <div class="trip-content-inside">
+                  <h3 class="trip-title">Malta</h3>
+                  <p class="trip-dest">Sol • História • Lagoa Azul</p>
+                </div>
+              </div>
+              <div class="trip-content-outside">
+                <div class="trip-info-row">6 dias • Pequeno grupo</div>
+                <div class="trip-leader">Líder: Bruno Oliveira</div>
+              </div>
+            </a>
+          </article>
+
+          <article class="trip-card">
+            <a href="#" class="trip-card-link">
+              <div class="trip-frame">
+                <img src="assets/images/china.jpg" alt="China" loading="lazy">
+                <div class="trip-gradient-overlay"></div>
+                <div class="badge">Setembro 2026</div>
+                <div class="trip-content-inside">
+                  <h3 class="trip-title">China</h3>
+                  <p class="trip-dest">Beijing • Chengdu • Chongqing</p>
+                </div>
+              </div>
+              <div class="trip-content-outside">
+                <div class="trip-info-row">12 dias • Pequeno grupo</div>
+                <div class="trip-leader">Líder: Bruno Oliveira</div>
+              </div>
+            </a>
+          </article>
+
+          <article class="trip-card">
+            <a href="#" class="trip-card-link">
+              <div class="trip-frame">
+                <img src="assets/images/londres.jpg" alt="Londres" loading="lazy">
+                <div class="trip-gradient-overlay"></div>
+                <div class="badge">Setembro 2026</div>
+                <div class="trip-content-inside">
+                  <h3 class="trip-title">Londres</h3>
+                  <p class="trip-dest">Premier League • City • Cultura</p>
+                </div>
+              </div>
+              <div class="trip-content-outside">
+                <div class="trip-info-row">3 dias • Pequeno grupo</div>
+                <div class="trip-leader">Líder: Bruno Oliveira</div>
+              </div>
+            </a>
+          </article>
+
+          <article class="trip-card">
+            <a href="#" class="trip-card-link">
+              <div class="trip-frame">
+                <img src="assets/images/japan.jpg" alt="Japão + Seul" loading="lazy">
+                <div class="trip-gradient-overlay"></div>
+                <div class="badge">Novembro 2026</div>
+                <div class="trip-content-inside">
+                  <h3 class="trip-title">Japão + Seul</h3>
+                  <p class="trip-dest">Tokyo • Kyoto • Osaka • Seoul</p>
+                </div>
+              </div>
+              <div class="trip-content-outside">
+                <div class="trip-info-row">12 dias • Pequeno grupo</div>
+                <div class="trip-leader">Líder: Bruno Oliveira</div>
+              </div>
+            </a>
+          </article>
+
+          <article class="trip-card">
+            <a href="#" class="trip-card-link">
+              <div class="trip-frame">
+                <img src="assets/images/dubai.jpg" alt="Dubai + Abu Dhabi" loading="lazy">
+                <div class="trip-gradient-overlay"></div>
+                <div class="badge">Dezembro 2026</div>
+                <div class="trip-content-inside">
+                  <h3 class="trip-title">Dubai + Abu Dhabi</h3>
+                  <p class="trip-dest">Cidade - deserto - Cultura - modernidade</p>
+                </div>
+              </div>
+              <div class="trip-content-outside">
+                <div class="trip-info-row">8 dias • Pequeno grupo</div>
+                <div class="trip-leader">Líder: Bruno Oliveira</div>
+              </div>
+            </a>
+          </article>
+
+          <article class="trip-card">
+            <a href="#" class="trip-card-link">
+              <div class="trip-frame">
+                <img src="assets/images/marrocos.jpg" alt="Marrocos" loading="lazy">
+                <div class="trip-gradient-overlay"></div>
+                <div class="badge">Março 2027</div>
+                <div class="trip-content-inside">
+                  <h3 class="trip-title">Marrocos</h3>
+                  <p class="trip-dest">Agadir • Marrakech • Deserto</p>
+                </div>
+              </div>
+              <div class="trip-content-outside">
+                <div class="trip-info-row">10 dias • Pequeno grupo</div>
+                <div class="trip-leader">Líder: Bruno Oliveira</div>
+              </div>
+            </a>
+          </article>
+
+          <article class="trip-card">
+            <a href="#" class="trip-card-link">
+              <div class="trip-frame">
+                <img src="assets/images/vietnam.jpg" alt="Vietnam" loading="lazy">
+                <div class="trip-gradient-overlay"></div>
+                <div class="badge">Abril 2027</div>
+                <div class="trip-content-inside">
+                  <h3 class="trip-title">Vietnam</h3>
+                  <p class="trip-dest">Hanoi • Ha Long • Hoi An</p>
+                </div>
+              </div>
+              <div class="trip-content-outside">
+                <div class="trip-info-row">10 dias • Pequeno grupo</div>
+                <div class="trip-leader">Líder: Bruno Oliveira</div>
+              </div>
+            </a>
+          </article>
+
+        </div>
       </div>
+      <div class="pagination-wrapper"><div class="pagination-lines" id="paginationLines"></div></div>
     </section>
 
-    <section class="container categories-section" style="padding-bottom: 80px;">
-      <h2 class="section-title" style="font-family: var(--font-display); font-size: 26px; margin-bottom: 32px;">Coleções</h2>
-      <div class="category-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
-        <a class="collection-card" href="https://wa.me/351963623430" target="_blank">
-          <div class="coll-img-box" style="height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 15px;"><img src="assets/images/tematicas.jpg" alt="Temáticas" style="width:100%; height:100%; object-fit:cover;"></div>
+    <section class="container categories-section">
+      <div style="margin-bottom: 24px;">
+        <h2 class="section-title">Coleções</h2>
+      </div>
+      <div class="category-grid">
+        <a class="collection-card" href="#">
+          <div class="coll-img-box"><img src="assets/images/tematicas.jpg" alt="Experiências temáticas"></div>
           <div class="coll-content">
-            <h3 class="coll-title" style="font-family: var(--font-display); font-size: 18px; margin-bottom: 4px;">Experiências Temáticas</h3>
-            <p class="coll-desc" style="font-size: 12px; color: var(--muted);">Futebol • F1 • Cinema</p>
+            <h3 class="coll-title">Experiências Temáticas</h3>
+            <p class="coll-desc">Futebol • F1 • Locais de filmagem</p>
           </div>
         </a>
-        <a class="collection-card" href="https://wa.me/351963623430" target="_blank">
-          <div class="coll-img-box" style="height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 15px;"><img src="assets/images/grandes.jpg" alt="Grandes Viagens" style="width:100%; height:100%; object-fit:cover;"></div>
+        <a class="collection-card" href="#">
+          <div class="coll-img-box"><img src="assets/images/grandes.jpg" alt="Grandes viagens"></div>
           <div class="coll-content">
-            <h3 class="coll-title" style="font-family: var(--font-display); font-size: 18px; margin-bottom: 4px;">Grandes Viagens</h3>
-            <p class="coll-desc" style="font-size: 12px; color: var(--muted);">Japão • China • Vietnam</p>
+            <h3 class="coll-title">Grandes Viagens</h3>
+            <p class="coll-desc">Japão • China • Vietnam • Dubai</p>
           </div>
         </a>
-        <a class="collection-card" href="https://wa.me/351963623430" target="_blank">
-          <div class="coll-img-box" style="height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 15px;"><img src="assets/images/sol.jpg" alt="Sol" style="width:100%; height:100%; object-fit:cover;"></div>
+        <a class="collection-card" href="#">
+          <div class="coll-img-box"><img src="assets/images/sol.jpg" alt="Sol e música"></div>
           <div class="coll-content">
-            <h3 class="coll-title" style="font-family: var(--font-display); font-size: 18px; margin-bottom: 4px;">Sol & Música</h3>
-            <p class="coll-desc" style="font-size: 12px; color: var(--muted);">Ibiza • Malta • Mykonos</p>
+            <h3 class="coll-title">Sol e Música</h3>
+            <p class="coll-desc">Ibiza • Malta • Barcelona</p>
           </div>
         </a>
-        <a class="collection-card" href="https://wa.me/351963623430" target="_blank">
-          <div class="coll-img-box" style="height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 15px;"><img src="assets/images/cultura.jpg" alt="Cultura" style="width:100%; height:100%; object-fit:cover;"></div>
+        <a class="collection-card" href="#">
+          <div class="coll-img-box"><img src="assets/images/cultura.jpg" alt="Cultura e cidades"></div>
           <div class="coll-content">
-            <h3 class="coll-title" style="font-family: var(--font-display); font-size: 18px; margin-bottom: 4px;">Cultura & Cidades</h3>
-            <p class="coll-desc" style="font-size: 12px; color: var(--muted);">Londres • Istambul • Roma</p>
+            <h3 class="coll-title">Cultura e Cidades</h3>
+            <p class="coll-desc">Londres • Roma • Istambul</p>
           </div>
         </a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid-minimal">
-        <div class="footer-col">
-          <div class="footer-title">Navegação</div>
-          <div class="footer-links-vert">
-            <a href="quem-somos.html">Quem somos</a>
-            <a href="viagens.html">Próximas Viagens</a>
-            <a href="guias-e-dicas.html">Guias e Dicas</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <div class="footer-title">Contactos</div>
-          <div class="footer-links-vert">
-            <a href="https://wa.me/351963623430">WhatsApp</a>
-            <a href="mailto:info@brunutravel.pt">info@brunutravel.pt</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <div class="footer-title">Social</div>
-          <div class="footer-socials">
-            <a href="https://instagram.com/brunutravel" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom-minimal">
-        <div>© 2026 Brunu Travel</div>
-        <div class="legal-links">
-          <button id="termosBtn" class="text-btn">Termos e Condições</button> • 
-          <button id="privacidadeBtn" class="text-btn">Privacidade e Cookies</button>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <div class="overlay" id="menuOverlay"><div class="modal"><header><strong>Menu</strong><button id="menuClose">✕</button></header><div class="modal-body stack"><a href="index.html" class="pill">Home</a><a href="quem-somos.html" class="pill">Quem Somos</a><a href="viagens.html" class="pill">Viagens</a><a href="guias-e-dicas.html" class="pill">Guias</a></div></div></div>
-  <div class="overlay" id="termosOverlay"><div class="modal"><header><strong>Termos e Condições</strong><button id="termosClose">✕</button></header><div class="modal-body" style="font-size:14px; color:var(--muted); line-height:1.6;">A Brunu Travel atua como organizadora de viagens de grupo...</div></div></div>
-  <div class="overlay" id="privacidadeOverlay"><div class="modal"><header><strong>Privacidade</strong><button id="privacidadeClose">✕</button></header><div class="modal-body" style="font-size:14px; color:var(--muted); line-height:1.6;">Respeitamos a tua privacidade de acordo com o RGPD...</div></div></div>
-
-  <button class="fab" onclick="window.location.href='https://wa.me/351963623430'">
-    <i class="fa-brands fa-whatsapp"></i> Podemos ajudar?
+<button class="fab" id="chatBtn" aria-label="WhatsApp Ajuda">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="fab-text">Podemos ajudar?</span>
   </button>
 
+  <div id="app-footer"></div>
+  <div id="app-modals"></div>
+
+  <script src="assets/components.js"></script>
+  <script>
+    if(typeof loadGlobalComponents === 'function') {
+      // Passa o nome da página atual para ativar o link no menu, ex: 'index.html'
+      loadGlobalComponents('NOME_DO_TEU_FICHEIRO.html'); 
+    }
+  </script>
   <script src="assets/app.js"></script>
 </body>
 </html>
