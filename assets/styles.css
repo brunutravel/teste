@@ -287,4 +287,109 @@ main { padding: 50px 0; }
 .modal header button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--cardBorder); background: transparent; color: var(--text); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
 .modal header button:hover { background: rgba(255,255,255,0.1); }
 .modal .modal-body { padding: 16px; }
-.modal .modal-link { display: flex; align-items: center; padding: 16px; bo
+.modal .modal-link { display: flex; align-items: center; padding: 16px; border-radius: 12px; font-weight: 500; font-size: 15px; transition: background 0.2s; text-decoration: none; color: var(--text); }
+.modal .modal-link:hover { background: rgba(255,255,255,0.05); }
+.modal .stack { display: flex; flex-direction: column; gap: 8px; }
+.chat-action-btn { background: #25D366; color: #fff; padding: 16px; border-radius: 16px; text-align: center; font-weight: 600; font-size: 15px; display: flex; justify-content: center; align-items: center; gap: 10px; transition: transform 0.2s; text-decoration: none; border: none; cursor: pointer; }
+.chat-action-btn:hover { transform: translateY(-2px); }
+
+/* --- 12. RESPONSIVIDADE --- */
+@media (max-width: 980px) {
+  .nav { display: none; }
+  .hero { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+  .hero-left { max-width: 100%; margin: 0 auto; }
+  .hero-title { font-size: clamp(32px, 5vw, 40px); }
+  .hero-p { margin: 0 auto; }
+  .hero-right { justify-content: center; }
+  .bio-card { max-width: 480px; }
+  .about-grid, .founder-grid, .vmv-grid, .category-grid { grid-template-columns: 1fr; gap: 40px; }
+  .founder-image-wrapper { order: -1; max-width: 400px; margin: 0 auto; }
+}
+@media (max-width: 768px) {
+  .footer-grid-minimal { grid-template-columns: 1fr; gap: 30px; text-align: left; }
+  .footer-bottom-minimal { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 520px) {
+  .pill { display: none; } 
+  .header-actions { gap: 6px; }
+  .bio-card { padding: 24px 16px; border-radius: 20px;}
+  .fab { right: 20px; bottom: 20px; padding: 12px; }
+  .fab-text { display: none; } 
+  .trip-card { flex: 0 0 240px; }
+}
+
+/* --- FUNDO PARCIAL DA HERO --- */
+/* Garante que o texto fica sobreposto e o fundo não sai da coluna */
+.hero-left {
+  position: relative;
+  z-index: 1; 
+  overflow: hidden; 
+}
+
+/* --- FUNDO PARCIAL DA HERO --- */
+.hero {
+  position: relative;
+  z-index: 1; 
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  
+  /* Ajusta estes valores no teu navegador primeiro */
+  bottom: 50px; 
+  left: 190px; 
+  width: 40%; 
+  height: 80%; 
+  
+  background-image: url('images/bg-linhas.png'); 
+  background-repeat: no-repeat;
+  background-size: contain; 
+  background-position: bottom left; 
+  
+  z-index: -1; 
+  opacity: 0.35; 
+  pointer-events: none; 
+}
+
+/* --- NOVA ESTRUTURA QUEM SOMOS (V3) --- */
+.text-center { text-align: center; }
+
+/* Secção do Fundador */
+.founder-grid-new { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 60px; 
+  align-items: center; 
+}
+.founder-img-wrap img { 
+  width: 100%; 
+  aspect-ratio: 16 / 11; /* Formato panorâmico elegante como na foto de inspiração */
+  object-fit: cover; 
+  border-radius: 20px; 
+  border: 1px solid var(--cardBorder); 
+  box-shadow: 0 24px 60px rgba(0,0,0,0.3); 
+}
+.founder-text p { 
+  font-size: 15.5px; 
+  color: var(--muted); 
+  line-height: 1.7; 
+  margin-bottom: 16px; 
+}
+
+/* Secção de Valores (4 colunas) */
+.values-grid-4 { 
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 24px; 
+}
+
+/* Responsividade Específica */
+@media (max-width: 980px) {
+  .founder-grid-new { grid-template-columns: 1fr; gap: 40px; }
+  .values-grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .values-grid-4 { grid-template-columns: 1fr; }
+  .founder-img-wrap img { aspect-ratio: 4 / 3; }
+}
