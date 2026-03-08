@@ -11,33 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Brunu Travel home">
-        <div class="logo-wrap"><img src="assets/images/logo.jpg" alt="Brunu Travel logo"></div>
-        <div class="brand-lines">
-          <div class="brand-name">Brunu Travel</div>
-          <div class="brand-tag">Viagens de grupo</div>
-        </div>
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="quem-somos.html">Quem somos</a>
-        <a href="viagens.html">Viagens de grupo</a>
-        <a href="guias-e-dicas.html">Guias e Dicas</a>
-      </nav>
-      <div class="header-actions">
-        <button class="pill" id="phoneBtn" type="button" aria-label="Contact phone">
-          🇵🇹 <span class="mini">(+351)</span> 963 623 430
-        </button>
-        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle theme">
-          <i class="fa-solid fa-moon"></i>
-        </button>
-        <button class="icon-btn" id="burgerBtn" type="button" aria-label="Open menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
-    </div>
-  </header>
+  
+  <div id="app-header"></div>
 
   <main>
     <section class="container hero">
@@ -116,83 +91,10 @@
     <span class="fab-text">Podemos ajudar?</span>
   </button>
 
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-links">
-          <div class="footer-title">Temas</div>
-          <a href="viagens.html#sol">Sol & Praia</a><br>
-          <a href="viagens.html#cultura">Cultura & Experiências</a><br>
-          <a href="viagens.html#desporto">Desporto</a><br>
-          <a href="viagens.html#grandes">Grandes Viagens</a>
-        </div>
-        <div class="footer-contact">
-          <div class="footer-title">Contactos</div>
-          <div><a href="mailto:info@brunutravel.pt">info@brunutravel.pt</a></div>
-          <div><a href="https://wa.me/351963623430" target="_blank" rel="noreferrer">WhatsApp (+351) 963 623 430</a></div>
-          <div><a href="https://www.brunutravel.pt" target="_blank" rel="noreferrer">www.brunutravel.pt</a></div>
-        </div>
-        <div>
-          <div class="footer-title">Redes <span style="text-transform:none; letter-spacing:0; font-weight:500; opacity:0.85; margin-left:4px;">@brunutravel</span></div>
-          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-            <a class="social" href="https://instagram.com/brunutravel" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a class="social" href="https://www.facebook.com/profile.php?id=61586558676697" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-            <a class="social" href="https://www.youtube.com/@brunu_uncut_travel" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-            <a class="social" href="https://www.tiktok.com/@brunu_uncut_travel" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Brunu Travel</span>
-      </div>
-    </div>
-  </footer>
+  <div id="app-footer"></div>
+  <div id="app-modals"></div>
 
-  <div class="overlay" id="menuOverlay" role="dialog" aria-modal="true">
-    <div class="modal">
-      <header><strong>Brunu Travel</strong><button id="menuClose">✕</button></header>
-      <div class="modal-body stack">
-        <a class="modal-link" href="index.html">Home <span>→</span></a>
-        <a class="modal-link" href="quem-somos.html">Quem somos <span>→</span></a>
-        <a class="modal-link" href="viagens.html">Viagens de grupo <span>→</span></a>
-        <a class="modal-link" href="guias-e-dicas.html">Guias e Dicas <span>→</span></a>
-      </div>
-    </div>
-  </div>
-  <div class="overlay" id="chatOverlay" role="dialog" aria-modal="true" aria-label="Atendimento">
-    <div class="modal chat-modal">
-      <header class="chat-header">
-        <div class="chat-profile">
-          <img src="assets/images/bruno-profile.jpg" alt="Bruno Oliveira">
-          <div class="chat-info">
-            <strong>Equipa Brunu Travel</strong>
-            <small>Responde habitualmente na hora</small>
-          </div>
-        </div>
-        <button id="chatClose" class="chat-close">✕</button>
-      </header>
-      <div class="modal-body chat-body">
-        <div class="chat-bubble bot-msg">
-          <p>Olá! 👋 Bem-vindo à Brunu Travel.</p>
-          <p>Clica no link em baixo para abrires uma nova conversa diretamente com o Bruno Oliveira pelo WhatsApp.</p>
-        </div>
-        <a href="https://wa.me/351963623430?text=Ol%C3%A1%20Bruno!%20Estou%20no%20site%20e%20gostava%20de%20saber%20mais." target="_blank" class="chat-action-btn">
-          <i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="overlay" id="phoneOverlay" role="dialog" aria-modal="true">
-    <div class="modal">
-      <header><strong>Contactos</strong><button id="phoneClose">✕</button></header>
-      <div class="modal-body stack">
-        <a class="modal-link" href="https://wa.me/351963623430">WhatsApp <span>(+351) 963 623 430</span></a>
-        <a class="modal-link" href="tel:+351963623430">Ligar <span>(+351) 963 623 430</span></a>
-        <a class="modal-link" href="mailto:info@brunutravel.pt">Email <span>info@brunutravel.pt</span></a>
-      </div>
-    </div>
-  </div>
-
+  <script src="assets/components.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>
